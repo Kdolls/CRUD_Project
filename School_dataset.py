@@ -69,3 +69,19 @@ INSERT INTO Enrollments VALUES
     (4, 2, 103, '2022-09-01'),
     (5, 3, 102, '2022-09-01'
 );"""
+
+# for i in read(link, 'SELECT * FROM Teachers'):
+#     print(read(link, 'SELECT * FROM Teachers'))
+
+
+#   table creation
+# execute_query(link, students_table)
+# execute_query(link, teachers_table)
+# execute_query(link, courses_table)
+# execute_query(link, enrollments_table)
+
+#   student sample values
+# execute_query(link,students_values)
+# execute_query(link,teachers_values)
+# execute_query(link,courses_values)
+# execute_query(link,enrollment_values)

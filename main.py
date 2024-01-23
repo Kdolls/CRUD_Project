@@ -6,10 +6,10 @@ import School_dataset
 
 #   mysql terminal access
 #   ====================
-#   mysql -u root -p {for initiating my sql} password == password
+#   mysql -u root -p password is password
 
 
-# SQL server connection function
+# SQL server connection
 def create_server_connection(host_name, user_name, user_password):
     connection = None
     try:
@@ -26,11 +26,13 @@ def create_server_connection(host_name, user_name, user_password):
     return connection
 
 
-link = create_server_connection('localhost', 'root', 'password')
+link = create_server_connection('localhost',
+                                'root',
+                                'password')
 
 
-# Query execution function
-def execute_query(connection, query):
+# Query execution
+def execute(connection, query):
     cursor = connection.cursor()
     try:
         cursor.execute(query)
@@ -40,16 +42,29 @@ def execute_query(connection, query):
         print(f"Error: '{err}'")
 
 
-#   table creation
-# execute_query(link, students_table)
-# execute_query(link, teachers_table)
-# execute_query(link, courses_table)
-# execute_query(link, enrollments_table)
+# Read database
+def read(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as err:
+        print(f"Error: '{err}'")
 
-#   student sample values
-# execute_query(link,students_values)
-# execute_query(link,teachers_values)
-# execute_query(link,courses_values)
-# execute_query(link,enrollment_values)
 
-execute_query(link, 'SHOW TABLES')
+# data converter into table dataframe formate, adds data to a list
+def data_converter(result):
+    db = []
+
+    for i in result:
+        result = list(result)
+        db.append(result)
+    return result
+
+
+# fetch data and present in a list
+data = read(link, 'SELECT * FROM Students')
+
+print(pd.DataFrame(data))
