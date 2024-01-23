@@ -16,6 +16,7 @@ def create_server_connection(host_name, user_name, user_password):
             host=host_name,
             user=user_name,
             passwd=user_password,
+            db='School'
         )
         print("MySQL Database connection successful")
     except Error as err:
@@ -36,14 +37,6 @@ def execute_query(connection, query):
         print("Query successful")
     except Error as err:
         print(f"Error: '{err}'")
-
-
-#                       FUNCTION CALL
-# create_database(connection,'CREATE DATABASE school')
-
-
-#   FUNCTION CALL
-# create_database(connection,'CREATE DATABASE school')
 
 
 #   Tables
@@ -118,4 +111,14 @@ INSERT INTO Enrollments VALUES
     (5, 3, 102, '2022-09-01'
 );"""
 
-execute_query(link, 'CREATE DATABASE School')
+#   table creation
+# execute_query(link, students_table)
+# execute_query(link, teachers_table)
+# execute_query(link, courses_table)
+# execute_query(link, enrollments_table)
+
+#   student sample values
+# execute_query(link,students_values)
+# execute_query(link,teachers_values)
+# execute_query(link,courses_values)
+# execute_query(link,enrollment_values)
