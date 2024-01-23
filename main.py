@@ -65,6 +65,11 @@ def data_converter(result):
 
 
 # fetch data and present in a list
-data = read(link, 'SELECT * FROM Students')
+data = read(link, 'SELECT * FROM Teachers')
 
 print(pd.DataFrame(data))
+
+""" encapsulate all in classes but have a look a at gui first"""
+
+"""ask for operation type
+""""""# invoke a class that carries our crud operations"""
