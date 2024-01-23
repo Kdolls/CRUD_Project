@@ -3,7 +3,12 @@ from mysql.connector import Error
 import pandas as pd
 
 
-#   SQL server connection function
+#   mysql terminal access
+#   ====================
+#   mysql -u root -p {for initiating my sql} password == password
+
+
+# SQL server connection function
 def create_server_connection(host_name, user_name, user_password):
     connection = None
     try:
@@ -11,7 +16,6 @@ def create_server_connection(host_name, user_name, user_password):
             host=host_name,
             user=user_name,
             passwd=user_password,
-            db='school'
         )
         print("MySQL Database connection successful")
     except Error as err:
@@ -20,18 +24,11 @@ def create_server_connection(host_name, user_name, user_password):
     return connection
 
 
-#   DATABASE creation function
-def create_database(connection, query):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        print("Database created successfully")
-    except Error as err:
-        print(f"Error: '{err}'")
+link = create_server_connection('localhost', 'root', 'password')
 
 
-#   Query execution function
-def ex_query(connection, query):
+# Query execution function
+def execute_query(connection, query):
     cursor = connection.cursor()
     try:
         cursor.execute(query)
@@ -41,8 +38,11 @@ def ex_query(connection, query):
         print(f"Error: '{err}'")
 
 
+#                       FUNCTION CALL
+# create_database(connection,'CREATE DATABASE school')
+
+
 #   FUNCTION CALL
-link = create_server_connection('localhost', 'root', 'password')
 # create_database(connection,'CREATE DATABASE school')
 
 
@@ -118,3 +118,4 @@ INSERT INTO Enrollments VALUES
     (5, 3, 102, '2022-09-01'
 );"""
 
+execute_query(link, 'CREATE DATABASE School')
