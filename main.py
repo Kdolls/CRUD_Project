@@ -7,5 +7,3 @@ import School_dataset
 #   mysql terminal access
 #   ====================
 #   mysql -u root -p password is password
-
-
