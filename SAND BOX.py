@@ -3,6 +3,7 @@ from mysql.connector import Error
 import pandas as pd
 
 
+# functions class
 class CRUD:
     def __init__(self):
         self.connection = None
@@ -19,6 +20,7 @@ class CRUD:
         except Error as err:
             print(f"Error: '{err}'")
 
+    # write, create, delete function
     def execute(self, query):
         cursor = self.connection.cursor()
         try:
@@ -28,6 +30,7 @@ class CRUD:
         except Error as err:
             print(f"Error: '{err}'")
 
+    # read function
     def read(self, query):
         cursor = self.connection.cursor()
         result = None
@@ -44,6 +47,7 @@ class CRUD:
             print("Connection closed")
 
 
+# student data
 class StudentDatabase(CRUD):
     def __init__(self):
         super().__init__()
@@ -66,8 +70,10 @@ class StudentDatabase(CRUD):
             query = "SELECT * FROM Students"
             read = CRUD()
             read.server_connection()
+
             data = read.read(query)
-            print(pd.DataFrame(data))
+            columns = ["Id", "Name", "Surname", "Birth date", "Enrollment"]
+            print(pd.DataFrame(data, columns=columns))
             print("Reading successful.")
         except Error as err:
             print(f"Error: '{err}'")
@@ -97,7 +103,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
 
-# Example Usage:
+# GUI start
 connection = CRUD()
 connection.server_connection()
 
@@ -154,4 +160,3 @@ def interface():
 
 
 interface()
-
