@@ -19,13 +19,13 @@ class Student:
 
     def add_new_student(self, cursor, connection):
         cursor.execute("INSERT INTO StudentsCoursesRegistraions (StudentID,StudentName) VALUES (?, ?)",
-                       (self.StudentID, self.StudentName))
+                     (self.StudentID, self.StudentName))
         connection.commit()
         print('Student Added Successfully')
 
     def update_student(self, cursor, connection):
         cursor.execute("UPDATE StudentsCoursesRegistraions SET StudentName = ? WHERE StudentID = ",
-                       (self.StudentName, self.StudentID))
+                     (self.StudentName, self.StudentID))
         connection.commit()
         print('Student Updated Successfully')
 
