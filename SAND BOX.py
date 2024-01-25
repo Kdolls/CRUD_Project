@@ -2,7 +2,7 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 
-
+# functions class
 class CRUD:
     def __init__(self):
         self.connection = None
@@ -18,7 +18,7 @@ class CRUD:
             print("Database connection successful")
         except Error as err:
             print(f"Error: '{err}'")
-
+# write, create, delete function
     def execute(self, query):
         cursor = self.connection.cursor()
         try:
@@ -27,7 +27,7 @@ class CRUD:
             print("Query successful")
         except Error as err:
             print(f"Error: '{err}'")
-
+# read function
     def read(self, query):
         cursor = self.connection.cursor()
         result = None
@@ -43,13 +43,13 @@ class CRUD:
             self.connection.close()
             print("Connection closed")
 
-
+# student data
 class StudentDatabase(CRUD):
     def __init__(self):
         super().__init__()
 
     @staticmethod
-    def create_student(student_id, first_name, last_name, date_of_birth, enrollment_date):
+    def create_student(student_id, first_nam2e, last_name, date_of_birth, enrollment_date):
         try:
             query = f"INSERT INTO Students (student_id, first_name, last_name, date_of_birth, enrollment_date) VALUES " \
                     f"('{student_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{enrollment_date}')"
@@ -66,8 +66,10 @@ class StudentDatabase(CRUD):
             query = "SELECT * FROM Students"
             read = CRUD()
             read.server_connection()
+
             data = read.read(query)
-            print(pd.DataFrame(data))
+            columns = ["Id", "Name", "Surname", "Birth date", "Enrollment"]
+            print(pd.DataFrame(data, columns=columns))
             print("Reading successful.")
         except Error as err:
             print(f"Error: '{err}'")
@@ -97,7 +99,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
 
-# Example Usage:
+# GUI start
 connection = CRUD()
 connection.server_connection()
 
@@ -154,4 +156,3 @@ def interface():
 
 
 interface()
-
