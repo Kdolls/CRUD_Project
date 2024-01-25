@@ -97,7 +97,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
 
-# Example Usage:
+# GUI
 connection = CRUD()
 connection.server_connection()
 
