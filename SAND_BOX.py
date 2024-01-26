@@ -1,8 +1,10 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
+import Personnel
 
 
+#   CRUD connection and execution functions control
 class CRUD:
     def __init__(self):
         self.connection = None
@@ -43,7 +45,10 @@ class CRUD:
             self.connection.close()
             print("Connection closed")
 
+            # --------------------end-----------------------------
 
+
+#       CRUD application control
 class StudentDatabase(CRUD):
     def __init__(self):
         super().__init__()
@@ -96,12 +101,15 @@ class StudentDatabase(CRUD):
         except Error as err:
             print(f"Error: '{err}'")
 
+            # --------------------end-----------------------------
 
-# GUI
+
+#       connection initialization:
 connection = CRUD()
 connection.server_connection()
 
 
+#       GUI start
 def interface():
     if connection:
         try:
@@ -154,3 +162,5 @@ def interface():
 
 
 interface()
+
+# --------------------end-----------------------------
