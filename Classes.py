@@ -161,6 +161,6 @@ def interface():
         print("Connection to the database failed.")
 
 
-# interface()
+interface()
 
 # --------------------end-----------------------------

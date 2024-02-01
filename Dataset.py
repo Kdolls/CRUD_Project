@@ -1,6 +1,4 @@
-#   Tables
-#   Students table
-import SAND_BOX
+import Classes
 
 students_table = """
 CREATE TABLE Students (
@@ -99,10 +97,10 @@ INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) 
 """
 
 # connection initialisation
-read_me = SAND_BOX.StudentDatabase()
-read_me.server_connection()
-write_me = SAND_BOX.CRUD()
-write_me.server_connection()
+# read_me = Classes.StudentDatabase()
+# read_me.server_connection()
+# write_me = Classes.CRUD()
+# write_me.server_connection()
 
 # write table
 # write_me.execute(teachers_table)
@@ -115,4 +113,4 @@ write_me.server_connection()
 # write_me.execute(enrollment_values)
 
 
-print(read_me.read("SELECT * FROM Enrollments"))
+# print(read_me.read("SELECT * FROM Enrollments"))
