@@ -9,7 +9,7 @@ class CRUD:
     def __init__(self):
         self.connection = None
 
-    def server_connection(self, db_name='School'):
+    def server_connection(self, db_name='St_George_college'):
         try:
             self.connection = mysql.connector.connect(
                 host='localhost',
@@ -161,6 +161,6 @@ def interface():
         print("Connection to the database failed.")
 
 
-interface()
+# interface()
 
 # --------------------end-----------------------------
