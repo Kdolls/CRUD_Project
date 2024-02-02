@@ -1,3 +1,5 @@
+import random
+
 # sort according to id numbers
 # sort alphabetically
 
@@ -38,4 +40,15 @@ def quick_sort(name):
         else:
             equal_value.append(letters)
     return quick_sort(lower_value) + equal_value + quick_sort(greater_value)
-print(quick_sort([1,2,5,7,9,4,3,2]))
+
+
+# Loop to generate random numbers
+sortlist = []
+def randomise():
+    for i in range(100):
+        random_number = random.randint(0, 10)
+        sortlist.append(random_number)
+        print(sortlist)
+
+
+randomise()

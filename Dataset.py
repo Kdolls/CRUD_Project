@@ -1,3 +1,6 @@
+import mysql.connector
+from mysql.connector import Error
+import pandas as pd
 import Classes
 
 students_table = """
@@ -50,8 +53,8 @@ INSERT INTO Students (student_id, first_name, last_name, date_of_birth, enrollme
     (6, 'Sarah', 'Miller', '2002-06-18', '2022-09-01'),
     (7, 'Michael', 'Taylor', '2000-09-30', '2022-09-01'),
     (8, 'Emma', 'Anderson', '2003-02-12', '2022-09-01'),
-    (9, 'Olivia', 'Martinez', '1998-11-25', '2022-09-01'),
-    (10, 'Jacob', 'Garcia', '2004-04-05', '2022-09-01');
+    (3, 'Olivia', 'Martinez', '1998-11-25', '2022-09-01'),
+    (0, 'Jacob', 'Garcia', '2004-04-05', '2022-09-01');
 """
 
 teachers_values = """
@@ -96,16 +99,18 @@ INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) 
     (10, 5, 106, '2022-09-01');
 """
 
+
 # connection initialisation
 # read_me = Classes.StudentDatabase()
 # read_me.server_connection()
+#
 # write_me = Classes.CRUD()
 # write_me.server_connection()
 
 # write table
-# write_me.execute(teachers_table)
-# write_me.execute(courses_table)
-# write_me.execute
+
+# write_me.execute(students_values)
+# print(read_me.read("SELECT * FROM Students"))
 
 # write values
 # write_me.execute(teachers_values)

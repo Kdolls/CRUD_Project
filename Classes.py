@@ -1,7 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-import Personnel
+
+import Search
 
 
 #   CRUD connection and execution functions control
@@ -10,6 +11,7 @@ class CRUD:
         self.connection = None
 
     def server_connection(self, db_name='St_George_college'):
+
         try:
             self.connection = mysql.connector.connect(
                 host='localhost',
@@ -27,7 +29,7 @@ class CRUD:
             cursor.execute(query)
             self.connection.commit()
             print("Query successful")
-        except Error as err:
+        except mysql.connector.Error as err:
             print(f"Error: '{err}'")
 
     def read(self, query):
@@ -45,13 +47,15 @@ class CRUD:
             self.connection.close()
             print("Connection closed")
 
-            # --------------------end-----------------------------
+
+# --------------------end-----------------------------
 
 
-#       CRUD application control
+#   CRUD application control
 class StudentDatabase(CRUD):
     def __init__(self):
         super().__init__()
+        pass
 
     @staticmethod
     def create_student(student_id, first_name, last_name, date_of_birth, enrollment_date):
@@ -101,7 +105,20 @@ class StudentDatabase(CRUD):
         except Error as err:
             print(f"Error: '{err}'")
 
-            # --------------------end-----------------------------
+    @staticmethod
+    def filter_data(q1, q2, query):
+        try:
+            request = f"SELECT * FROM {q1} WHERE {q2} = '{query}'"
+            read = CRUD()
+            read.server_connection()
+            data = read.read(request)
+            print(pd.DataFrame(data))
+            print(f"{q1} with {q2} {query} filtered successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+
+# --------------------end-----------------------------
 
 
 #       connection initialization:
@@ -119,7 +136,8 @@ def interface():
                 print("2. Read Students")
                 print("3. Update Student")
                 print("4. Delete Student")
-                print("5. Exit")
+                print("5. Search")
+                print("6. Exit")
 
                 choice = input("Enter your choice (1-5): ")
 
@@ -148,6 +166,12 @@ def interface():
                     StudentDatabase.delete_student(student_id)
 
                 elif choice == '5':
+                    q1 = Search.Search()
+                    q2 = Search.Search()
+                    q3 = Search.Search()
+                    StudentDatabase.filter_data(q1.menu_A(), q2.menu_B(), q3.menu_C())
+
+                elif choice == '6':
                     break
 
                 else:
@@ -162,5 +186,8 @@ def interface():
 
 
 interface()
-
 # --------------------end-----------------------------
+
+# testing = StudentDatabase()
+# testing.server_connection()
+# testing.filter_data(343)
