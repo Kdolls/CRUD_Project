@@ -1,9 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-# import Classes
-
-
 
 #  connection initialization:
 # connection = Classes.CRUD()
@@ -35,27 +32,28 @@ class Search:
                             "course_id"]
 
         # Display the choice menu
+
     def menu_A(self):
-        print("Choose search category: \n")
+        # print("Choose search category: \n")
         for index, lis in enumerate(self.list_A, start=1):
             print(f"{index}. {lis}")
         # Get user input
-        user_choice = input("\n Enter the number of your choice:  ")
+        user_choice = input("\n Enter a number for the Search Category from the above list:  ")
         try:
             choice_index = int(user_choice)
             if 1 <= choice_index <= len(self.list_A):
                 chosen_category = self.list_A[choice_index - 1]
                 print(f"You have chosen: {chosen_category}")
-                return chosen_category
             else:
                 print("Invalid choice. Please enter a valid number.")
                 return None
         except ValueError:
             print("Invalid choice. Please enter a valid number.")
             return None
+        return chosen_category
 
     def menu_B(self):
-        # print("Choose search keyword:\n")
+        # print("Search selection by: \n")
         current_list = None
         # Determine the current list based on the chosen category from menu_A
         chosen_category = self.menu_A()
@@ -92,13 +90,12 @@ class Search:
 
         return choice
 
+if __name__ == "__main__":
 
-# if __name__ == "__main__":
-#
-#     StudentDatabase.filter_data(menu_A(), menu_B(), menu_C())
+# StudentDatabase.filter_data(menu_A(), menu_B(), menu_C())
 
-# test = Search()
-# test.menu_A()
-# test.menu_B()
-# test.menu_C()
+    test = Search()
+    # test.menu_A()
+    test.menu_B()
+    test.menu_C()
 #

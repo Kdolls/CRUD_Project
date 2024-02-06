@@ -52,10 +52,24 @@ class CRUD:
 
 
 #   CRUD application control
+
+# Students CRUD
 class StudentDatabase(CRUD):
     def __init__(self):
         super().__init__()
         pass
+
+    @staticmethod
+    def filter_data(q1, q2, query):
+        try:
+            request = f"SELECT * FROM {q1} WHERE {q2} = '{query}'"
+            read = CRUD()
+            read.server_connection()
+            data = read.read(request)
+            print(pd.DataFrame(data))
+            print(f"{q1} with {q2} {query} filtered successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
 
     @staticmethod
     def create_student(student_id, first_name, last_name, date_of_birth, enrollment_date):
@@ -105,15 +119,105 @@ class StudentDatabase(CRUD):
         except Error as err:
             print(f"Error: '{err}'")
 
+    # --------------------end-----------------------------
+
+    # Teachers CRUD
     @staticmethod
-    def filter_data(q1, q2, query):
+    def create_teacher(teacher_id, first_name, last_name, date_of_birth, hire_date):
         try:
-            request = f"SELECT * FROM {q1} WHERE {q2} = '{query}'"
+            query = f"INSERT INTO Students (student_id, first_name, last_name, date_of_birth, hire_date) VALUES " \
+                    f"('{teacher_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{hire_date}')"
+            create = CRUD()
+            create.server_connection()
+            create.execute(query)
+            print(f"Teacher {first_name} created successfully.")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def read_all_teacher():
+        try:
+            query = "SELECT * FROM Teachers"
             read = CRUD()
             read.server_connection()
-            data = read.read(request)
+            data = read.read(query)
             print(pd.DataFrame(data))
-            print(f"{q1} with {q2} {query} filtered successfully")
+            print("Reading successful.")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def update_teacher(teacher_id, new_first_name, new_last_name, new_date_of_birth, new_hire_date):
+        try:
+            query = f"UPDATE Teachers SET first_name = '{new_first_name}', last_name = '{new_last_name}', " \
+                    f"date_of_birth = '{new_date_of_birth}', hire_date = '{new_hire_date}' " \
+                    f"WHERE teacher_id = '{teacher_id}'"
+            update = CRUD()
+            update.server_connection()
+            update.execute(query)
+            print(f"Teacher with ID {teacher_id} updated successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def delete_teacher(teacher_id):
+        try:
+            query = f"DELETE FROM Teachers WHERE teacher_id = '{teacher_id}'"
+            delete = CRUD()
+            delete.server_connection()
+            delete.execute(query)
+            print(f"Student with ID {teacher_id} deleted successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    # --------------------end-----------------------------
+
+    # Courses CRUD
+    @staticmethod
+    def create_course(course_id, course_name, teacher_id):
+        try:
+            query = f"INSERT INTO Courses (course_id, course_name, course_description, instructor_id) VALUES " \
+                    f"('{course_id}', '{course_name}', '{teacher_id}')"
+            create = CRUD()
+            create.server_connection()
+            create.execute(query)
+            print(f"Course {course_name} created successfully.")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def read_all_Course():
+        try:
+            query = "SELECT * FROM Courses"
+            read = CRUD()
+            read.server_connection()
+            data = read.read(query)
+            print(pd.DataFrame(data))
+            print("Reading successful.")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def update_Course(course_id, new_course_name, new_teacher_id):
+        try:
+            query = f"UPDATE Courses SET course_name = '{new_course_name}'," \
+                    f"teacher_id = '{new_teacher_id}', " \
+                    f"WHERE course_id = '{course_id}'"
+            update = CRUD()
+            update.server_connection()
+            update.execute(query)
+            print(f"Course with ID {course_id} updated successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
+
+    @staticmethod
+    def delete_Course(course_id):
+        try:
+            query = f"DELETE FROM Courses WHERE teacher_id = '{course_id}'"
+            delete = CRUD()
+            delete.server_connection()
+            delete.execute(query)
+            print(f"Courses with ID {course_id} deleted successfully")
         except Error as err:
             print(f"Error: '{err}'")
 
@@ -121,73 +225,57 @@ class StudentDatabase(CRUD):
 # --------------------end-----------------------------
 
 
-#       connection initialization:
-connection = CRUD()
-connection.server_connection()
+# Enrollment CRUD
+
+@staticmethod
+def create_enrollment(enrollment_id, student_id, course_id, enrollment_date):
+    try:
+        query = f"INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) " \
+                f"VALUES ('{enrollment_id}', '{student_id}', '{course_id}', '{enrollment_date}')"
+        create = CRUD()
+        create.server_connection()
+        create.execute(query)
+        print("Enrollment created successfully.")
+    except Error as err:
+        print(f"Error: '{err}'")
 
 
-#       GUI start
-def interface():
-    if connection:
-        try:
-            while True:
-                print("\nCRUD Operations:")
-                print("1. Create Student")
-                print("2. Read Students")
-                print("3. Update Student")
-                print("4. Delete Student")
-                print("5. Search")
-                print("6. Exit")
-
-                choice = input("Enter your choice (1-5): ")
-
-                if choice == '1':
-                    student_id = input("Enter student ID: ")
-                    first_name = input("Enter first name: ")
-                    last_name = input("Enter last name: ")
-                    date_of_birth = input("Enter date of birth (YYYY-MM-DD): ")
-                    enrollment_date = input("Enter enrollment date (YYYY-MM-DD): ")
-                    StudentDatabase.create_student(student_id, first_name, last_name, date_of_birth, enrollment_date)
-
-                elif choice == '2':
-                    StudentDatabase.read_all_students()
-
-                elif choice == '3':
-                    student_id = input("Enter student ID to update: ")
-                    new_first_name = input("Enter new first name: ")
-                    new_last_name = input("Enter new last name: ")
-                    new_date_of_birth = input("Enter new date of birth in form of (YYYY-MM-DD): ")
-                    new_enrollment_date = input("Enter new enrollment date in form of (YYYY-MM-DD): ")
-                    StudentDatabase.update_student(student_id, new_first_name, new_last_name,
-                                                   new_date_of_birth, new_enrollment_date)
-
-                elif choice == '4':
-                    student_id = input("Enter student ID to delete: ")
-                    StudentDatabase.delete_student(student_id)
-
-                elif choice == '5':
-                    q1 = Search.Search()
-                    q2 = Search.Search()
-                    q3 = Search.Search()
-                    StudentDatabase.filter_data(q1.menu_A(), q2.menu_B(), q3.menu_C())
-
-                elif choice == '6':
-                    break
-
-                else:
-                    print("Invalid choice. Please enter a number between 1 and 5.")
-
-        except KeyboardInterrupt:
-            print("\nProgram terminated by user.")
-        finally:
-            CRUD.close_connection(connection)
-    else:
-        print("Connection to the database failed.")
+@staticmethod
+def read_all_enrollments():
+    try:
+        query = "SELECT * FROM Enrollments"
+        read = CRUD()
+        read.server_connection()
+        data = read.read(query)
+        print(pd.DataFrame(data))
+        print("Reading successful.")
+    except Error as err:
+        print(f"Error: '{err}'")
 
 
-interface()
+@staticmethod
+def update_enrollment(enrollment_id, new_student_id, new_course_id, new_enrollment_date):
+    try:
+        query = (f"UPDATE Enrollments SET new_student_id = '{new_student_id}', new_course_id = '{new_course_id}'," 
+                 f"new_enrollment_date = '{new_enrollment_date}' " 
+                 f" WHERE enrollment_id = '{enrollment_id}'")
+        update = CRUD()
+        update.server_connection()
+        update.execute(query)
+        print(f"Enrollment with ID {enrollment_id} updated successfully")
+    except Error as err:
+        print(f"Error: '{err}'")
+
+
+@staticmethod
+def delete_enrollment(enrollment_id):
+    try:
+        query = f"DELETE FROM Enrollments WHERE id = '{enrollment_id}'"
+        delete = CRUD()
+        delete.server_connection()
+        delete.execute(query)
+        print(f"Enrollment with ID {enrollment_id} deleted successfully")
+    except Error as err:
+        print(f"Error: '{err}'")
+
 # --------------------end-----------------------------
-
-# testing = StudentDatabase()
-# testing.server_connection()
-# testing.filter_data(343)
