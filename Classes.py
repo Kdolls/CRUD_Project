@@ -54,7 +54,7 @@ class CRUD:
 #   CRUD application control
 
 # Students CRUD
-class StudentDatabase(CRUD):
+class Database(CRUD):
     def __init__(self):
         super().__init__()
         pass
@@ -135,7 +135,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
     @staticmethod
-    def read_all_teacher():
+    def read_all_teachers():
         try:
             query = "SELECT * FROM Teachers"
             read = CRUD()
@@ -186,7 +186,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
     @staticmethod
-    def read_all_Course():
+    def read_all_courses():
         try:
             query = "SELECT * FROM Courses"
             read = CRUD()
@@ -198,7 +198,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
     @staticmethod
-    def update_Course(course_id, new_course_name, new_teacher_id):
+    def update_course(course_id, new_course_name, new_teacher_id):
         try:
             query = f"UPDATE Courses SET course_name = '{new_course_name}'," \
                     f"teacher_id = '{new_teacher_id}', " \
@@ -211,7 +211,7 @@ class StudentDatabase(CRUD):
             print(f"Error: '{err}'")
 
     @staticmethod
-    def delete_Course(course_id):
+    def delete_course(course_id):
         try:
             query = f"DELETE FROM Courses WHERE teacher_id = '{course_id}'"
             delete = CRUD()
@@ -221,61 +221,56 @@ class StudentDatabase(CRUD):
         except Error as err:
             print(f"Error: '{err}'")
 
+    # --------------------end-----------------------------
 
-# --------------------end-----------------------------
+    # Enrollment CRUD
 
+    @staticmethod
+    def create_enrollment(enrollment_id, student_id, course_id, enrollment_date):
+        try:
+            query = f"INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) " \
+                    f"VALUES ('{enrollment_id}', '{student_id}', '{course_id}', '{enrollment_date}')"
+            create = CRUD()
+            create.server_connection()
+            create.execute(query)
+            print("Enrollment created successfully.")
+        except Error as err:
+            print(f"Error: '{err}'")
 
-# Enrollment CRUD
+    @staticmethod
+    def read_all_enrollments():
+        try:
+            query = "SELECT * FROM Enrollments"
+            read = CRUD()
+            read.server_connection()
+            data = read.read(query)
+            print(pd.DataFrame(data))
+            print("Reading successful.")
+        except Error as err:
+            print(f"Error: '{err}'")
 
-@staticmethod
-def create_enrollment(enrollment_id, student_id, course_id, enrollment_date):
-    try:
-        query = f"INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) " \
-                f"VALUES ('{enrollment_id}', '{student_id}', '{course_id}', '{enrollment_date}')"
-        create = CRUD()
-        create.server_connection()
-        create.execute(query)
-        print("Enrollment created successfully.")
-    except Error as err:
-        print(f"Error: '{err}'")
+    @staticmethod
+    def update_enrollment(enrollment_id, new_student_id, new_course_id, new_enrollment_date):
+        try:
+            query = (f"UPDATE Enrollments SET new_student_id = '{new_student_id}', new_course_id = '{new_course_id}',"
+                     f"new_enrollment_date = '{new_enrollment_date}' "
+                     f" WHERE enrollment_id = '{enrollment_id}'")
+            update = CRUD()
+            update.server_connection()
+            update.execute(query)
+            print(f"Enrollment with ID {enrollment_id} updated successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
 
-
-@staticmethod
-def read_all_enrollments():
-    try:
-        query = "SELECT * FROM Enrollments"
-        read = CRUD()
-        read.server_connection()
-        data = read.read(query)
-        print(pd.DataFrame(data))
-        print("Reading successful.")
-    except Error as err:
-        print(f"Error: '{err}'")
-
-
-@staticmethod
-def update_enrollment(enrollment_id, new_student_id, new_course_id, new_enrollment_date):
-    try:
-        query = (f"UPDATE Enrollments SET new_student_id = '{new_student_id}', new_course_id = '{new_course_id}'," 
-                 f"new_enrollment_date = '{new_enrollment_date}' " 
-                 f" WHERE enrollment_id = '{enrollment_id}'")
-        update = CRUD()
-        update.server_connection()
-        update.execute(query)
-        print(f"Enrollment with ID {enrollment_id} updated successfully")
-    except Error as err:
-        print(f"Error: '{err}'")
-
-
-@staticmethod
-def delete_enrollment(enrollment_id):
-    try:
-        query = f"DELETE FROM Enrollments WHERE id = '{enrollment_id}'"
-        delete = CRUD()
-        delete.server_connection()
-        delete.execute(query)
-        print(f"Enrollment with ID {enrollment_id} deleted successfully")
-    except Error as err:
-        print(f"Error: '{err}'")
+    @staticmethod
+    def delete_enrollment(enrollment_id):
+        try:
+            query = f"DELETE FROM Enrollments WHERE id = '{enrollment_id}'"
+            delete = CRUD()
+            delete.server_connection()
+            delete.execute(query)
+            print(f"Enrollment with ID {enrollment_id} deleted successfully")
+        except Error as err:
+            print(f"Error: '{err}'")
 
 # --------------------end-----------------------------
