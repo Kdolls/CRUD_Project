@@ -19,7 +19,7 @@ class CRUD:
                 passwd='password',
                 db=db_name
             )
-            print("Database connection successful")
+            # print("Database connection successful")
         except Error as err:
             print(f"Error: '{err}'")
 

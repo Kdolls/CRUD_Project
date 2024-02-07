@@ -16,12 +16,12 @@ def interface():
     if connection:
         try:
             while True:
-                print("\nCRUD Operations:")
+                print("\nPlease select an Operations: \n")
                 print("1. Create Teacher")
                 print("2. Read Teachers")
                 print("3. Update Teacher")
                 print("4. Delete Teacher")
-                print("5. Exit")
+                print("5. Return\n")
 
                 choice = input("Enter your choice (1-5): ")
 

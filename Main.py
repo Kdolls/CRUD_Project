@@ -20,6 +20,7 @@ def interface():
     if connection:
         try:
             while True:
+
                 print("\n1. Student operations ")
                 print("2. Teacher operations ")
                 print("3. Course operations ")
@@ -27,7 +28,8 @@ def interface():
                 print("5. Search")
                 print("6. Exit\n")
 
-                choice = input("Enter your choice (1-5): ")
+                choice = input("Welcome to St_George_college database managemnet tool.\n Please "
+                               "Enter your choice from menu above: ")
                 # instance call for each available interface
                 if choice == '1':
                     Student_CRUD.interface()
