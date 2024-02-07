@@ -61,7 +61,3 @@ def interface():
 if __name__ == "__main__":
     interface()
 # --------------------end-----------------------------
-
-# testing = StudentDatabase()
-# testing.server_connection()
-# testing.filter_data(343)

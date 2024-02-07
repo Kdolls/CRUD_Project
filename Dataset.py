@@ -99,23 +99,3 @@ INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) 
     (10, 5, 106, '2022-09-01');
 """
 
-
-# connection initialisation
-# read_me = Classes.StudentDatabase()
-# read_me.server_connection()
-#
-# write_me = Classes.CRUD()
-# write_me.server_connection()
-
-# write table
-
-# write_me.execute(students_values)
-# print(read_me.read("SELECT * FROM Students"))
-
-# write values
-# write_me.execute(teachers_values)
-# write_me.execute(courses_values)
-# write_me.execute(enrollment_values)
-
-
-# print(read_me.read("SELECT * FROM Enrollments"))
