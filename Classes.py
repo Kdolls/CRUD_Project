@@ -1,7 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
 import pandas as pd
-
 import Search
 
 
@@ -125,7 +124,7 @@ class Database(CRUD):
     @staticmethod
     def create_teacher(teacher_id, first_name, last_name, date_of_birth, hire_date):
         try:
-            query = f"INSERT INTO Students (student_id, first_name, last_name, date_of_birth, hire_date) VALUES " \
+            query = f"INSERT INTO Teachers (teacher_id, first_name, last_name, date_of_birth, hire_date) VALUES " \
                     f"('{teacher_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{hire_date}')"
             create = CRUD()
             create.server_connection()
