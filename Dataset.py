@@ -42,7 +42,7 @@ CREATE TABLE Enrollments (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );"""
 
-# dataset
+# Dataset
 students_values = """
 INSERT INTO Students (student_id, first_name, last_name, date_of_birth, enrollment_date) VALUES
     (1, 'John', 'Doe', '2000-01-15', '2022-09-01'),

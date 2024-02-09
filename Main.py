@@ -10,13 +10,17 @@ import Teacher_CRUD
 from Classes import Database
 from Classes import CRUD
 
-#       connection initialization:
+# connection initialization:
 connection = Classes.CRUD()
 connection.server_connection()
 
 
-#       GUI start
+# GUI start
 def interface():
+    """
+    Main user interface for the database.
+    Displays options for CRUD operations on different entities and handles user input.
+    """
     if connection:
         try:
             while True:
@@ -28,7 +32,7 @@ def interface():
                 print("5. Search")
                 print("6. Exit\n")
 
-                choice = input("Welcome to St_George_college database managemnet tool.\n Please "
+                choice = input("Welcome to St_George_college database management tool.\n Please "
                                "Enter your choice from menu above: ")
                 # instance call for each available interface
                 if choice == '1':
@@ -39,6 +43,7 @@ def interface():
                     Course_CRUD.interface()
                 elif choice == '4':
                     Enroll_CRUD.interface()
+
                 elif choice == '5':
                     search = Search.Search()
                     chosen_category = search.menu_A()
@@ -52,9 +57,9 @@ def interface():
                     elif chosen_category == "Enrollments":
                         current_list = search.list_enroll
 
-                    chosen_keyword = search.menu_B(chosen_category, current_list)
-                    search.menu_C()
-                    Database.filter_data(chosen_category, chosen_keyword, choice)
+                    keyword = search.menu_B(chosen_category, current_list)
+                    credential = search.menu_C()
+                    Database.filter_data(chosen_category, keyword, credential)
 
                 elif choice == '6':
                     break
@@ -71,5 +76,7 @@ def interface():
 
 
 if __name__ == "__main__":
+    # Entry point of the script when executed directly.
+    # Calls the interface function to start the application.
     interface()
 # --------------------end-----------------------------

@@ -4,13 +4,26 @@ import pandas as pd
 import Search
 
 
-#   CRUD connection and execution functions control
+# CRUD connection and execution functions control
 class CRUD:
+    """
+    Class to perform CRUD operations on a MySQL database.
+    """
+
     def __init__(self):
+        """
+        Constructor method for CRUD class.
+        Initializes connection attribute to None.
+        """
         self.connection = None
 
     def server_connection(self, db_name='St_George_college'):
+        """
+          Establishes connection to the MySQL database.
 
+          Parameters:
+              db_name (str): The name of the database to connect to. Default is 'St_George_college'.
+        """
         try:
             self.connection = mysql.connector.connect(
                 host='localhost',
@@ -23,6 +36,10 @@ class CRUD:
             print(f"Error: '{err}'")
 
     def execute(self, query):
+        """
+          Executes a SQL query.
+          Parameters: query (str): The SQL query to execute.
+        """
         cursor = self.connection.cursor()
         try:
             cursor.execute(query)
@@ -32,6 +49,11 @@ class CRUD:
             print(f"Error: '{err}'")
 
     def read(self, query):
+        """
+        Executes a SQL query to retrieve data.
+        Parameters: query (str): The SQL query to execute.
+        Returns: list: List of tuples containing the retrieved data.
+        """
         cursor = self.connection.cursor()
         result = None
         try:
@@ -42,6 +64,9 @@ class CRUD:
             print(f"Error: '{err}'")
 
     def close_connection(self):
+        """
+        Closes the database connection.
+        """
         if self.connection and self.connection.is_connected():
             self.connection.close()
             print("Connection closed")
@@ -54,12 +79,26 @@ class CRUD:
 
 # Students CRUD
 class Database(CRUD):
+    """
+    Class to perform CRUD operations on specific database tables.
+    """
     def __init__(self):
+        """
+        Constructor method for Database class.
+        Calls parent constructor.
+        """
         super().__init__()
         pass
 
     @staticmethod
     def filter_data(q1, q2, query):
+        """
+        Filters data from a table based on specified criteria.
+        Parameters:
+            q1 (str): Table name.
+            q2 (str): Column name.
+            query (str): Value to filter by.
+        """
         try:
             request = f"SELECT * FROM {q1} WHERE {q2} = '{query}'"
             read = CRUD()
@@ -109,7 +148,19 @@ class Database(CRUD):
 
     @staticmethod
     def delete_student(student_id):
+        """
+        Deletes a student record from the database along with related enrollment records.
+        Parameters:
+            student_id (str): The ID of the student to delete.
+        """
         try:
+            # Delete related enrollment records first
+            enrollment_query = f"DELETE FROM Enrollments WHERE student_id = '{student_id}'"
+            delete_enrollment = CRUD()
+            delete_enrollment.server_connection()
+            delete_enrollment.execute(enrollment_query)
+
+            # Then delete the student record
             query = f"DELETE FROM Students WHERE student_id = '{student_id}'"
             delete = CRUD()
             delete.server_connection()
@@ -165,7 +216,7 @@ class Database(CRUD):
             delete = CRUD()
             delete.server_connection()
             delete.execute(query)
-            print(f"Student with ID {teacher_id} deleted successfully")
+            print(f"Teacher with ID {teacher_id} deleted successfully")
         except Error as err:
             print(f"Error: '{err}'")
 

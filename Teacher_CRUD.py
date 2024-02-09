@@ -6,12 +6,12 @@ import Search
 from Classes import Database
 from Classes import CRUD
 
-#       connection initialization:
+# connection initialization:
 connection = Classes.CRUD()
 connection.server_connection()
 
 
-#       GUI start
+# GUI start
 def interface():
     if connection:
         try:
@@ -63,9 +63,6 @@ def interface():
         print("Connection to the database failed.")
 
 
-
 if __name__ == "__main__":
     interface()
 # --------------------end-----------------------------
-
-

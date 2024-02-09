@@ -2,7 +2,6 @@ import mysql.connector
 from mysql.connector import Error
 import pandas as pd
 import Classes
-import Search
 from Classes import Database
 from Classes import CRUD
 
@@ -58,7 +57,6 @@ def interface():
             CRUD.close_connection(connection)
     else:
         print("Connection to the database failed.")
-
 
 
 if __name__ == "__main__":
