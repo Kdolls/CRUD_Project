@@ -57,9 +57,9 @@ def interface():
                     elif chosen_category == "Enrollments":
                         current_list = search.list_enroll
 
-                    keyword = search.menu_B(chosen_category, current_list)
+                    search_keyword = search.menu_B(chosen_category, current_list)
                     credential = search.menu_C()
-                    Database.filter_data(chosen_category, keyword, credential)
+                    Database.filter_data(chosen_category, search_keyword, credential)
 
                 elif choice == '6':
                     break

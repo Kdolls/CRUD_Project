@@ -35,8 +35,8 @@ class CRUD:
 
     def execute(self, query):
         """
-          Executes a SQL query.
-          query (str): The SQL query to execute.
+        Executes a SQL query.
+        query (str): The SQL query to execute.
         """
         cursor = self.connection.cursor()
         try:
@@ -73,7 +73,7 @@ class CRUD:
 # --------------------end-----------------------------
 
 
-#   CRUD application control
+# CRUD application control
 
 # Students CRUD
 class Database(CRUD):
@@ -109,6 +109,14 @@ class Database(CRUD):
 
     @staticmethod
     def create_student(student_id, first_name, last_name, date_of_birth, enrollment_date):
+        """
+        Creates new student in database
+            -student_id (str): The ID of the student to create.
+            -first_name (str): Student's first name.
+            -last_name (str): Student's last name.
+            -date_of_birth (str): Birth date.
+            -enrollment_date (str): Course enrollment date.
+        """
         try:
             query = f"INSERT INTO Students (student_id, first_name, last_name, date_of_birth, enrollment_date) VALUES " \
                     f"('{student_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{enrollment_date}')"
@@ -121,6 +129,9 @@ class Database(CRUD):
 
     @staticmethod
     def read_all_students():
+        """
+        Reads and displays all Student details in database.
+        """
         try:
             query = "SELECT * FROM Students"
             read = CRUD()
@@ -133,6 +144,14 @@ class Database(CRUD):
 
     @staticmethod
     def update_student(student_id, new_first_name, new_last_name, new_date_of_birth, new_enrollment_date):
+        """
+        Updates existing student in database.
+           -student_id (str): The ID of the student to update.
+           -new_first_name (str): New Student's first name.
+           -new_last_name (str): New Student's last name.
+           -new_date_of_birth (str): New Birth date.
+           -new_enrollment_date (str): New Course enrollment date.
+       """
         try:
             query = f"UPDATE Students SET first_name = '{new_first_name}', last_name = '{new_last_name}', " \
                     f"date_of_birth = '{new_date_of_birth}', enrollment_date = '{new_enrollment_date}' " \
@@ -171,6 +190,14 @@ class Database(CRUD):
     # Teachers CRUD
     @staticmethod
     def create_teacher(teacher_id, first_name, last_name, date_of_birth, hire_date):
+        """
+        Creates new Teacher in database
+            -Teacher_id (str): Create new ID.
+            -first_name (str): Teacher's first name.
+            -last_name (str): Teacher's last name.
+            -date_of_birth (str): Birth date.
+            -hire_date (str): Date hired.
+        """
         try:
             query = f"INSERT INTO Teachers (teacher_id, first_name, last_name, date_of_birth, hire_date) VALUES " \
                     f"('{teacher_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{hire_date}')"
@@ -183,6 +210,9 @@ class Database(CRUD):
 
     @staticmethod
     def read_all_teachers():
+        """
+        Reads and displays all Teacher details in database.
+        """
         try:
             query = "SELECT * FROM Teachers"
             read = CRUD()
@@ -195,6 +225,14 @@ class Database(CRUD):
 
     @staticmethod
     def update_teacher(teacher_id, new_first_name, new_last_name, new_date_of_birth, new_hire_date):
+        """
+        Updates existing Teacher in database.
+         -Teacher_id (str): The ID of the teacher to update.
+         -new_first_name (str): New teacher's first name.
+         -new_last_name (str): New teacher's last name.
+         -new_date_of_birth (str): New Birth date.
+         -new_hire_date (str): New hire date.
+        """
         try:
             query = f"UPDATE Teachers SET first_name = '{new_first_name}', last_name = '{new_last_name}', " \
                     f"date_of_birth = '{new_date_of_birth}', hire_date = '{new_hire_date}' " \
@@ -208,6 +246,10 @@ class Database(CRUD):
 
     @staticmethod
     def delete_teacher(teacher_id):
+        """
+        Deletes a teacher record from the database along with related enrollment records.
+        teacher_id (str): The ID of the teacher to delete.
+        """
         try:
             query = f"DELETE FROM Teachers WHERE teacher_id = '{teacher_id}'"
             delete = CRUD()
@@ -222,6 +264,12 @@ class Database(CRUD):
     # Courses CRUD
     @staticmethod
     def create_course(course_id, course_name, teacher_id):
+        """
+        Creates new Course in database
+            -course_id (str): Create new course ID.
+            -course_name (str): Creates course  name.
+            -teacher_id (str): Teacher's id of which course added to.
+        """
         try:
             query = f"INSERT INTO Courses (course_id, course_name, course_description, instructor_id) VALUES " \
                     f"('{course_id}', '{course_name}', '{teacher_id}')"
@@ -234,6 +282,9 @@ class Database(CRUD):
 
     @staticmethod
     def read_all_courses():
+        """
+        Reads and displays all Courses details in database.
+        """
         try:
             query = "SELECT * FROM Courses"
             read = CRUD()
@@ -246,6 +297,12 @@ class Database(CRUD):
 
     @staticmethod
     def update_course(course_id, new_course_name, new_teacher_id):
+        """
+        Updates existing Course in database.
+         -course_id (str): Existing course_id to update.
+         -new_course_name (str): Creates new course  name.
+         -new_teacher_id (str): new Teacher's id of which course added to.
+        """
         try:
             query = f"UPDATE Courses SET course_name = '{new_course_name}'," \
                     f"teacher_id = '{new_teacher_id}', " \
@@ -259,6 +316,10 @@ class Database(CRUD):
 
     @staticmethod
     def delete_course(course_id):
+        """
+        Deletes a Course record from the database.
+        course_id (str): The ID of the Course to delete.
+        """
         try:
             query = f"DELETE FROM Courses WHERE teacher_id = '{course_id}'"
             delete = CRUD()
@@ -274,6 +335,13 @@ class Database(CRUD):
 
     @staticmethod
     def create_enrollment(enrollment_id, student_id, course_id, enrollment_date):
+        """
+        Creates new enrollment in database
+            -enrollment_id (str): Create new enrollment ID.
+            -student_id (str): Enrolls student with id.
+            -course_id (str): Adds enrollment to course_id.
+            -enrollment_date (str): Enrollment date.
+        """
         try:
             query = f"INSERT INTO Enrollments (enrollment_id, student_id, course_id, enrollment_date) " \
                     f"VALUES ('{enrollment_id}', '{student_id}', '{course_id}', '{enrollment_date}')"
@@ -286,6 +354,10 @@ class Database(CRUD):
 
     @staticmethod
     def read_all_enrollments():
+        """
+        Reads and displays all enrollments details in database.
+        """
+
         try:
             query = "SELECT * FROM Enrollments"
             read = CRUD()
@@ -298,6 +370,13 @@ class Database(CRUD):
 
     @staticmethod
     def update_enrollment(enrollment_id, new_student_id, new_course_id, new_enrollment_date):
+        """
+        Updates existing enrollment in database.
+            -enrollment_id (str): Updates new enrollment ID.
+            -student_id (str): Updates student with id.
+            -course_id (str): Updates enrollment to course_id.
+            -enrollment_date (str): Updates Enrollment date.
+        """
         try:
             query = (f"UPDATE Enrollments SET new_student_id = '{new_student_id}', new_course_id = '{new_course_id}',"
                      f"new_enrollment_date = '{new_enrollment_date}' "
@@ -311,6 +390,10 @@ class Database(CRUD):
 
     @staticmethod
     def delete_enrollment(enrollment_id):
+        """
+        Deletes a Enrollment record from the database.
+        enrollment_id (str): The ID of the enroll date to delete.
+        """
         try:
             query = f"DELETE FROM Enrollments WHERE id = '{enrollment_id}'"
             delete = CRUD()
