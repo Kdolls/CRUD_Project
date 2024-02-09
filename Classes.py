@@ -20,9 +20,7 @@ class CRUD:
     def server_connection(self, db_name='St_George_college'):
         """
           Establishes connection to the MySQL database.
-
-          Parameters:
-              db_name (str): The name of the database to connect to. Default is 'St_George_college'.
+          db_name (str): The name of the database to connect to. Default is 'St_George_college'.
         """
         try:
             self.connection = mysql.connector.connect(
@@ -38,7 +36,7 @@ class CRUD:
     def execute(self, query):
         """
           Executes a SQL query.
-          Parameters: query (str): The SQL query to execute.
+          query (str): The SQL query to execute.
         """
         cursor = self.connection.cursor()
         try:
@@ -150,8 +148,7 @@ class Database(CRUD):
     def delete_student(student_id):
         """
         Deletes a student record from the database along with related enrollment records.
-        Parameters:
-            student_id (str): The ID of the student to delete.
+        student_id (str): The ID of the student to delete.
         """
         try:
             # Delete related enrollment records first

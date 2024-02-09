@@ -5,12 +5,12 @@ import Classes
 from Classes import Database
 from Classes import CRUD
 
-#       connection initialization:
+# connection initialization:
 connection = Classes.CRUD()
 connection.server_connection()
 
 
-#       GUI start
+# GUI start
 def interface():
     if connection:
         try:
