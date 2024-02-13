@@ -22,33 +22,37 @@ import random
 
 # return all of the above finding:
 # lower values + pivot point + greater values
+class Quick_Sort:
+    def __init__(self):
+        pass
 
-def quick_sort(name):
-    if len(name) <= 1:
-        return name
-    else:
-        pivot = name[0]
-        lower_value = []
-        greater_value = []
-        equal_value = []
-
-    for letters in name:
-        if letters < pivot:
-            lower_value.append(letters)
-        elif letters > pivot:
-            greater_value.append(letters)
+    @staticmethod
+    def sorted(name):
+        if len(name) <= 1:
+            return name
         else:
-            equal_value.append(letters)
-    return quick_sort(lower_value) + equal_value + quick_sort(greater_value)
+            pivot = name[0]
+            lower_value = []
+            greater_value = []
+            equal_value = []
+
+        for letters in name:
+            if letters < pivot:
+                lower_value.append(letters)
+            elif letters > pivot:
+                greater_value.append(letters)
+            else:
+                equal_value.append(letters)
+        return sorted(lower_value) + equal_value + sorted(greater_value)
 
 
 # Loop to generate random numbers
-sortlist = []
-def randomise():
-    for i in range(100):
-        random_number = random.randint(0, 10)
-        sortlist.append(random_number)
-        print(sortlist)
-
-
-randomise()
+# sortlist = []
+# def randomise():
+#     for i in range(100):
+#         random_number = random.randint(0, 10)
+#         sortlist.append(random_number)
+#         print(sortlist)
+#
+#
+# randomise()

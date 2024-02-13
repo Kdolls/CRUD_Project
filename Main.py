@@ -9,6 +9,8 @@ import Student_CRUD
 import Teacher_CRUD
 from Classes import Database
 from Classes import CRUD
+from Sorted import Filter_me
+import Quick_sort
 
 # connection initialization:
 connection = Classes.CRUD()
@@ -24,8 +26,10 @@ def interface():
     if connection:
         try:
             while True:
+                # Quick sort testing instance------------------------------------------
+                print('\n0. For A Sorted view click me!\n')
 
-                print("\n1. Student operations ")
+                print("1. Student operations ")
                 print("2. Teacher operations ")
                 print("3. Course operations ")
                 print("4. Enrollments operations ")
@@ -60,6 +64,25 @@ def interface():
                     search_keyword = search.menu_B(chosen_category, current_list)
                     credential = search.menu_C()
                     Database.filter_data(chosen_category, search_keyword, credential)
+
+                # Quick sort testing-------------------------------------------------------
+
+                elif choice == '0':
+                    search = Search.Search()
+                    chosen_category = search.menu_A()
+
+                    if chosen_category == "Students":
+                        current_list = search.list_student
+                    elif chosen_category == "Teachers":
+                        current_list = search.list_teacher
+                    elif chosen_category == "Courses":
+                        current_list = search.list_course
+                    elif chosen_category == "Enrollments":
+                        current_list = search.list_enroll
+
+                    print(Filter_me.sort_all_data(chosen_category))
+
+                    # end----------------------------------------------------------------------
 
                 elif choice == '6':
                     break
