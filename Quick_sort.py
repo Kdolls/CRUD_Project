@@ -43,4 +43,4 @@ class Quick_Sort:
         for i, item in enumerate(value):
             if item == key:
                 return i
-        return print('not found')
+        return print('result error')
