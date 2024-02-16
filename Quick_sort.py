@@ -1,42 +1,26 @@
-import random
-
-# sort according to id numbers
-# sort alphabetically
-
-# take in sequence of unsorted values:
-#     length of the values
-#
-#     specific the beginning of the values:
-#         if length <= 1:
-#             return values
-#
-#         else use pop?
-#
-# once compared to the pivot point move values into these list:
-#     values greater list
-#     values lower list
-
-# logic:
-#         if values > pivot, move to greater list, otherwise
-#             move to lower
-
-# return all of the above finding:
-# lower values + pivot point + greater values
 class Quick_Sort:
+    """
+    Implements quick sort algorithm in its classic form
+    """
     def __init__(self):
         pass
 
     @staticmethod
-    def sorted(name):
-        if len(name) <= 1:
-            return name
+    def sorted(value):
+        """
+        Executes quick sort algorithm
+            :param value: passed in value Str
+            :return: sorted value in form of lower,equal, higher
+        """
+        if len(value) <= 1:
+            return value
         else:
-            pivot = name[0]
+            pivot = value[0]
             lower_value = []
             greater_value = []
             equal_value = []
 
-        for letters in name:
+        for letters in value:
             if letters < pivot:
                 lower_value.append(letters)
             elif letters > pivot:
@@ -45,14 +29,3 @@ class Quick_Sort:
                 equal_value.append(letters)
         return sorted(lower_value) + equal_value + sorted(greater_value)
 
-
-# Loop to generate random numbers
-# sortlist = []
-# def randomise():
-#     for i in range(100):
-#         random_number = random.randint(0, 10)
-#         sortlist.append(random_number)
-#         print(sortlist)
-#
-#
-# randomise()
