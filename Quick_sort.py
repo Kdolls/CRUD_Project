@@ -2,6 +2,7 @@ class Quick_Sort:
     """
     Implements quick sort algorithm in its classic form
     """
+
     def __init__(self):
         pass
 
@@ -29,3 +30,17 @@ class Quick_Sort:
                 equal_value.append(letters)
         return sorted(lower_value) + equal_value + sorted(greater_value)
 
+    @staticmethod
+    def search_me(value, key):
+        """
+        Perform linear search string.
+        Parameters:
+            value (str): String to be searched.
+            key: The value to search for.
+        Returns:
+            int: The index of the key if found, otherwise return printed value.
+        """
+        for i, item in enumerate(value):
+            if item == key:
+                return i
+        return print('not found')

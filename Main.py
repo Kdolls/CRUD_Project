@@ -32,8 +32,10 @@ def interface():
                 print("2. Teacher operations ")
                 print("3. Course operations ")
                 print("4. Enrollments operations ")
-                print("5. Search")
-                print('6. Sorting all entries\n')
+                print("5. Query Search")
+                print('6. Sorting all entries')
+                print('7. Linear search\n')
+
                 print("0. Exit\n")
 
                 choice = input("Welcome to St_George_college database management tool.\n Please "
@@ -65,7 +67,7 @@ def interface():
                     credential = search.menu_C()
                     Database.filter_data(chosen_category, search_keyword, credential)
 
-                # Quick sort testing-------------------------------------------------------
+                # Quick sort -------------------------------------------------------
 
                 elif choice == '6':
                     search = Search.Search()
@@ -83,6 +85,30 @@ def interface():
                     print(Filter_me.sort_all_data(chosen_category))
 
                     # end----------------------------------------------------------------------
+
+                    # linear search.............................................................
+
+                elif choice == '7':
+                    search = Search.Search()
+                    chosen_category = search.menu_A()
+                    current_list = None
+                    if chosen_category == "Students":
+                        current_list = search.list_student
+                    elif chosen_category == "Teachers":
+                        current_list = search.list_teacher
+                    elif chosen_category == "Courses":
+                        current_list = search.list_course
+                    elif chosen_category == "Enrollments":
+                        current_list = search.list_enroll
+
+                    search_keyword = search.menu_B(chosen_category, current_list)
+                    credential = search.menu_C()
+
+                    # data = Filter_me.query_filter(search_keyword, credential)
+                    data = Quick_sort.Quick_Sort.search_me(search_keyword, credential)
+                    print(data)
+
+                    # end test..........................................................................
 
                 elif choice == '0':
                     break

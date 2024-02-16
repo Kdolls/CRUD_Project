@@ -36,20 +36,18 @@ class Filter_me:
             print(f"Error: '{err}'")
 
     @staticmethod
-    def query_filter(q1, q2):
+    def search_me(value, key):
         """
-        Filters data from a table based on specified criteria.
+        Perform linear search on a list of data.
         Parameters:
-            q1 (str): Table name.
-            q2 (str): Column name.
-            query (str): Value to filter by.
+            value (str): The list to be searched.
+            key: The value to search for.
+        Returns:
+            int: The index of the key if found, otherwise -1.
         """
-        try:
-            request = f"SELECT * FROM {q1} WHERE {q2}"
-            read = CRUD()
-            read.server_connection()
-            data = read.read(request)
-            print(pd.DataFrame(data))
-            print(f"{q1} with {q2}  filtered successfully")
-        except Error as err:
-            print(f"Error: '{err}'")
+        for i, item in enumerate(value):
+            if item == key:
+                return i
+        return print('not found')
+
+
