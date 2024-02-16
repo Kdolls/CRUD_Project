@@ -12,32 +12,24 @@ class Search:
         self.list_A = ["Students", "Teachers", "Courses", "Enrollments"]
 
         # keywords
-        self.list_student = ["student_id"]
-        # Testing feature for the update
-        # self.list_student = ["student_id",
-        #                      "student_first_name",
-        #                      "student_last_name",
-        #                      "student_date_of_birth"]
+        self.list_student = ["student_id",
+                             "student_first_name",
+                             "student_last_name",
+                             "student_date_of_birth"]
 
-        self.list_teacher = ["teacher_id"]
-        # Testing feature for the update
-        # self.list_teacher = ["teacher_id",
-        #                      "teacher_first_name",
-        #                      "teacher_last_name",
-        #                      "teacher_date_of_birth",
-        #                      "teacher_hire_date"]
+        self.list_teacher = ["teacher_id",
+                             "teacher_first_name",
+                             "teacher_last_name",
+                             "teacher_date_of_birth",
+                             "teacher_hire_date"]
 
-        self.list_course = ["course_id"]
-        # Testing feature for the update
-        # self.list_course = ["course_id",
-        #                     "course_name",
-        #                     "teacher_id"]
+        self.list_course = ["course_id",
+                            "course_name",
+                            "teacher_id"]
 
-        self.list_enroll = ["enrollment_id"]
-        # Testing feature for the update
-        # self.list_enroll = ["enrollment_id",
-        #                     "student_id",
-        #                     "course_id"]
+        self.list_enroll = ["enrollment_id",
+                            "student_id",
+                            "course_id"]
 
     def menu_A(self):
         """

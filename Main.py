@@ -27,14 +27,14 @@ def interface():
         try:
             while True:
                 # Quick sort testing instance------------------------------------------
-                print('\n0. For A Sorted view click me!\n')
 
-                print("1. Student operations ")
+                print("\n1. Student operations ")
                 print("2. Teacher operations ")
                 print("3. Course operations ")
                 print("4. Enrollments operations ")
                 print("5. Search")
-                print("6. Exit\n")
+                print('6. Sorting all entries\n')
+                print("0. Exit\n")
 
                 choice = input("Welcome to St_George_college database management tool.\n Please "
                                "Enter your choice from menu above: ")
@@ -67,7 +67,7 @@ def interface():
 
                 # Quick sort testing-------------------------------------------------------
 
-                elif choice == '0':
+                elif choice == '6':
                     search = Search.Search()
                     chosen_category = search.menu_A()
 
@@ -84,7 +84,7 @@ def interface():
 
                     # end----------------------------------------------------------------------
 
-                elif choice == '6':
+                elif choice == '0':
                     break
 
                 else:
